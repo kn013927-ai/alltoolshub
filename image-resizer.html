@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Resizer</title>
+<style>
+body{font-family:Arial;background:#f4f7fb;color:#222;padding:20px}
+main{max-width:600px;margin:auto;background:white;padding:25px;border-radius:10px}
+input,button{padding:12px;margin:8px 0;max-width:100%;box-sizing:border-box}
+button{background:#163b65;color:white;border:0;border-radius:5px}
+img{max-width:100%;margin-top:15px}
+</style>
+</head>
+<body>
+<main>
+<h1>Image Resizer</h1>
+<p>Select an image and enter the new dimensions.</p>
+
+<input type="file" id="file" accept="image/*">
+<input type="number" id="width" placeholder="Width in pixels">
+<input type="number" id="height" placeholder="Height in pixels">
+
+<button onclick="resizeImage()">Resize Image</button>
+
+<p id="result"></p>
+<img id="preview" style="display:none">
+
+<script>
+function resizeImage(){
+let file=document.getElementById("file").files[0];
+let w=Number(document.getElementById("width").value);
+let h=Number(document.getElementById("height").value);
+
+if(!file||!w||!h){
+document.getElementById("result").textContent="Select an image and enter dimensions.";
+return;
+}
+
+let img=new Image();
+img.onload=function(){
+let canvas=document.createElement("canvas");
+canvas.width=w;
+canvas.height=h;
+
+canvas.getContext("2d").drawImage(img,0,0,w,h);
+
+let url=canvas.toDataURL("image/png");
+let preview=document.getElementById("preview");
+
+preview.src=url;
+preview.style.display="block";
+
+let link=document.createElement("a");
+link.href=url;
+link.download="resized-image.png";
+link.textContent="Download Resized Image";
+
+let result=document.getElementById("result");
+result.textContent="";
+result.appendChild(link);
+
+URL.revokeObjectURL(img.src);
+};
+
+img.src=URL.createObjectURL(file);
+}
+</script>
+</main>
+</body>
+</html>
