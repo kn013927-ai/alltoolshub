@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Converter</title>
+<style>
+body{font-family:Arial;background:#f4f7fb;color:#222;padding:20px}
+main{max-width:600px;margin:auto;background:white;padding:25px;border-radius:10px}
+input,select,button{padding:12px;margin:8px 0;width:100%;box-sizing:border-box}
+button{background:#163b65;color:white;border:0;border-radius:5px}
+</style>
+</head>
+<body>
+<main>
+<h1>Unit Converter</h1>
+<p>Convert length, weight and temperature.</p>
+
+<input type="number" id="value" placeholder="Enter value">
+
+<select id="type" onchange="updateUnits()">
+<option value="length">Length</option>
+<option value="weight">Weight</option>
+<option value="temperature">Temperature</option>
+</select>
+
+<select id="from"></select>
+<select id="to"></select>
+
+<button onclick="convert()">Convert</button>
+<p id="result"></p>
+
+<script>
+let units={
+length:["Meters","Kilometers","Centimeters","Miles","Feet"],
+weight:["Kilograms","Grams","Pounds","Ounces"],
+temperature:["Celsius","Fahrenheit","Kelvin"]
+};
+
+function updateUnits(){
+let type=document.getElementById("type").value;
+["from","to"].forEach(id=>{
+let select=document.getElementById(id);
+select.innerHTML="";
+units[type].forEach(unit=>{
+let option=document.createElement("option");
+option.textContent=unit;
+option.value=unit;
+select.appendChild(option);
+});
+});
+}
+
+function convert(){
+let value=Number(document.getElementById("value").value);
+let from=document.getElementById("from").value;
+let to=document.getElementById("to").value;
+let type=document.getElementById("type").value;
+
+if(document.getElementById("value").value===""){
+document.getElementById("result").textContent="Enter a value.";
+return;
+}
+
+let factors={
+Meters:1,Kilometers:1000,Centimeters:0.01,
+Miles:1609.344,Feet:0.3048,
+Kilograms:1,Grams:0.001,Pounds:0.45359237,Ounces:0.0283495
+};
+
+let result;
+
+if(type==="temperature"){
+let c=value;
+if(from==="Fahrenheit")c=(value-32)*5/9;
+if(from==="Kelvin")c=value-273.15;
+
+result=c;
+if(to==="Fahrenheit")result=c*9/5+32;
+if(to==="Kelvin")result=c+273.15;
+}else{
+result=value*factors[from]/factors[to];
+}
+
+document.getElementById("result").textContent=
+"Result: "+Number(result.toFixed(6))+" "+to;
+}
+
+updateUnits();
+</script>
+</main>
+</body>
+</html>
