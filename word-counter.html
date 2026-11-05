@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Counter</title>
+<style>
+body{font-family:Arial;background:#f4f7fb;color:#222;padding:20px}
+main{max-width:600px;margin:auto;background:white;padding:25px;border-radius:10px}
+textarea{width:100%;height:200px;box-sizing:border-box;padding:12px}
+</style>
+</head>
+<body>
+<main>
+<h1>Word Counter</h1>
+<p>Enter your text below to count words and characters.</p>
+
+<textarea id="text" placeholder="Type or paste your text here"></textarea>
+
+<p>Words: <span id="words">0</span></p>
+<p>Characters: <span id="chars">0</span></p>
+
+<script>
+document.getElementById("text").addEventListener("input",function(){
+let text=this.value.trim();
+let words=text===""?0:text.split(/\s+/).length;
+
+document.getElementById("words").textContent=words;
+document.getElementById("chars").textContent=this.value.length;
+});
+</script>
+</main>
+</body>
+</html>
