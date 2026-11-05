@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percentage Calculator</title>
+<style>
+body{font-family:Arial;background:#f4f7fb;color:#222;margin:0;padding:20px}
+main{max-width:600px;margin:auto;background:white;padding:25px;border-radius:10px}
+input,button{padding:12px;margin:8px 0;width:100%;box-sizing:border-box}
+button{background:#163b65;color:white;border:0;border-radius:5px}
+</style>
+</head>
+<body>
+<main>
+<h1>Percentage Calculator</h1>
+<p>Calculate the percentage of a number.</p>
+
+<input type="number" id="number" placeholder="Enter total number">
+<input type="number" id="percent" placeholder="Enter percentage">
+
+<button onclick="calculate()">Calculate</button>
+<p id="result"></p>
+
+<script>
+function calculate(){
+let n=Number(document.getElementById("number").value);
+let p=Number(document.getElementById("percent").value);
+
+if(document.getElementById("number").value==="" ||
+document.getElementById("percent").value===""){
+document.getElementById("result").textContent="Please enter both numbers.";
+return;
+}
+
+document.getElementById("result").textContent=
+p+"% of "+n+" = "+(n*p/100);
+}
+</script>
+</main>
+</body>
+</html>
