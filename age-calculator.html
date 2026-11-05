@@ -1,39 +1,161 @@
-<section id="age">
-  <h2>Age Calculator</h2>
-  <p>Enter your date of birth:</p>
 
-  <input type="date" id="birth">
-  <button onclick="ageCalc()">Calculate Age</button>
-  <p class="result" id="ageResult"></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator</title>
 
-  <div class="tool-guide">
-    <h3>How to Use the Age Calculator</h3>
-    <p>Enter your date of birth and click the Calculate Age button to find your age. Make sure you select the correct date.</p>
-    <p><strong>Example:</strong> Select 1 January 2000, then click Calculate Age.</p>
-  </div>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #222;
+  padding: 20px;
+}
 
-  <div class="tool-guide">
-    <h3>Understanding Your Age Calculation</h3>
-    <p>This calculator works out your age from your date of birth to today. It shows your age in completed years, months, and days.</p>
+main {
+  max-width: 700px;
+  margin: 20px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
 
-    <h3>How to Use It</h3>
-    <p>Select your date of birth, then click the Calculate Age button. Check that the date and year are correct before calculating.</p>
+h1, h2, h3 {
+  color: #163b65;
+}
 
-    <h3>Example</h3>
-    <p>If your date of birth is 1 January 2000, the calculator uses today's date to work out how many years, months, and days have passed.</p>
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
 
-    <h3>About the Result</h3>
-    <p>The result is an age calculation, not an official document. For forms or legal purposes, follow the instructions of the organization requesting your age.</p>
+button {
+  background: #163b65;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    <h3>What is an Age Calculator and Why is it Important?</h3>
-    <p>An Age Calculator is a simple but powerful online tool that helps you determine your exact chronological age. While it may seem easy to calculate age manually, it becomes complicated when you consider leap years, months with different numbers of days, and precise day counting. Our free Age Calculator solves this problem instantly. It is widely used for many important purposes. Students use it to check age eligibility for school admissions and competitive exams. Job seekers need accurate age for government job applications where every day counts. It is also helpful for retirement planning, insurance premium calculations, and determining health-related milestones. Instead of counting days on a calendar, you can get a 100% accurate result in one click, saving time and avoiding errors.</p>
+button:hover {
+  background: #245783;
+}
 
-    <h3>Benefits of Using Our Free Online Age Calculator</h3>
-    <p>Our tool is designed to be fast, accurate, and completely private. First, it is 100% free and does not require any registration or signup. Second, it is highly accurate because it automatically accounts for leap years and varying month lengths. Third, your privacy is protected - your date of birth is not stored on any server, all calculations happen directly in your browser. Fourth, it works perfectly on all devices, including mobile phones, tablets, and desktop computers. You don't need to download any app. Whether you need your age for a form, for fun, or for official documentation reference, this tool gives you the correct answer instantly without any hassle.</p>
+.result {
+  font-weight: bold;
+  font-size: 18px;
+  color: #163b65;
+}
 
-    <h3>Frequently Asked Questions (FAQs)</h3>
-    <p><strong>Q1: Is this Age Calculator 100% accurate?</strong><br>Yes, it calculates your age by using the current date from your device and comparing it with your birth date. It includes leap years, so the result in years, months, and days is completely accurate.</p>
-    <p><strong>Q2: Do you save my date of birth?</strong><br>No, we never save or store your personal information. The calculation is done locally in your browser and your data never leaves your device, so it is completely safe and secure.</p>
-    <p><strong>Q3: Can I calculate the age of any person?</strong><br>Yes, you can calculate the age of any person, including children, adults, or even historical figures, by entering their date of birth. It will show how many years, months, and days have passed until today.</p>
-  </div>
-</section>
+.tool-guide {
+  margin-top: 30px;
+  line-height: 1.7;
+}
+
+a {
+  color: #163b65;
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+<h1>Age Calculator</h1>
+
+<p>Enter your date of birth to calculate your exact age.</p>
+
+<input type="date" id="birth">
+
+<button onclick="ageCalc()">Calculate Age</button>
+
+<p class="result" id="ageResult"></p>
+
+<div class="tool-guide">
+
+<h2>How to Use the Age Calculator</h2>
+
+<p>Enter your date of birth and click the Calculate Age button to find your age in years, months, and days.</p>
+
+<p><strong>Example:</strong> Select 1 January 2000, then click Calculate Age.</p>
+
+<h2>Understanding Your Age Calculation</h2>
+
+<p>This calculator works out your age from your date of birth to today's date. It shows your completed years, months, and days.</p>
+
+<h2>About the Result</h2>
+
+<p>The result is an age calculation, not an official document. For legal or official purposes, follow the instructions of the organization requesting your age.</p>
+
+<h2>Benefits of Using Our Free Online Age Calculator</h2>
+
+<p>Our free calculator works directly in your browser. It does not require registration, and your date of birth is not sent to a server.</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is this Age Calculator accurate?</h3>
+<p>It calculates your age using the current date and your date of birth, including leap years.</p>
+
+<h3>Do you save my date of birth?</h3>
+<p>No. The calculation happens in your browser, and your date of birth is not stored by this calculator.</p>
+
+<h3>Can I calculate another person's age?</h3>
+<p>Yes. Enter any valid date of birth to calculate the person's age.</p>
+
+</div>
+
+</main>
+
+<script>
+function ageCalc() {
+  const birthValue = document.getElementById("birth").value;
+  const result = document.getElementById("ageResult");
+
+  if (!birthValue) {
+    result.textContent = "Please enter your date of birth.";
+    return;
+  }
+
+  const birth = new Date(birthValue + "T00:00:00");
+  const today = new Date();
+
+  if (birth > today) {
+    result.textContent = "Date of birth cannot be in the future.";
+    return;
+  }
+
+  let years = today.getFullYear() - birth.getFullYear();
+  let months = today.getMonth() - birth.getMonth();
+  let days = today.getDate() - birth.getDate();
+
+  if (days < 0) {
+    months--;
+    const previousMonth = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      0
+    );
+    days += previousMonth.getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  result.textContent =
+    "Your age is " + years + " years, " +
+    months + " months, and " + days + " days.";
+}
+</script>
+
+</body>
+</html>
